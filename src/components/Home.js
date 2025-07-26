@@ -10,6 +10,8 @@ import HeroImage from './HeroImage'
 import Grid from './Grid'
 import Thumb from './Thumb'
 import Spinner from './Spinner'
+import SearchBar from './SearchBar'
+import Button from './Button'
 
 // hook 
 import { useHomeFetch } from '../hooks/useHomeFetch'
@@ -21,11 +23,14 @@ import NoImage from '../images/no_image.jpg';
 const Home = () => {
     
     // use es6 destructive syntax
-    const { state, loading, error } = useHomeFetch();
+    const { state, loading, error, searchTerm, setSearchTerm,setIsLoadingMore } = useHomeFetch();
     console.log(state);
+
+    if(error) return (<div>Something went Wrogn!!!</div>);
+
     return( 
         <>
-            {state.results[0] ? (
+            {!searchTerm && state.results[0] ? (
             <HeroImage 
                 image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.results[0].backdrop_path}`} 
                 // title={`some title`}
@@ -35,7 +40,8 @@ const Home = () => {
                 text={state.results[0].overview}
             />
             ) : null}
-            <Grid header='Popular Movies'>
+            <SearchBar setSearchTerm={setSearchTerm}/>
+            <Grid  header={!searchTerm ?'Popular Movies' : 'Search Results'}>
                 {state.results.map(movie => (
                     <Thumb
                         key={movie.id}
@@ -49,7 +55,11 @@ const Home = () => {
                     />
                 ))}
             </Grid>
-            <Spinner/>
+            {loading && <Spinner/>}
+            {state.page < state.total_pages && !loading && (
+                <Button text='Load More' callback={()=> setIsLoadingMore(true)}/>
+            )}
+
         </>
     )
 };

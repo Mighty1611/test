@@ -16,7 +16,10 @@ export const useHomeFetch = () => {
     const [state, setState] = useState(initialState); // State that will hold all the movies
     const [loading, setLoading] = useState(false); // state for loadig
     const [error, setError] = useState(false); // for when we get error from API
+    const [searchTerm,setSearchTerm] = useState('');
+    const [isLoadingMore,setIsLoadingMore] = useState(false);
 
+    console.log(searchTerm);
 
     const fetchMovies = async(page, searchTerm = '') => {
         try{
@@ -33,6 +36,7 @@ export const useHomeFetch = () => {
             // spreads the object 'movies' into ...movies
             // dont mutate, if mutate, it wont rerender.
 
+
             setState(prev => ({
                  ...movies,
                  results:
@@ -46,12 +50,21 @@ export const useHomeFetch = () => {
 
     // we want to trigger this only on MOUNT / only initially == done by that ',[]' === dependency array
     // we can specify different dependencies on when we want useEffect to trigger
-    // [] empty array == run ONCE
+    // [] empty array == Dependency Array (2nd argument == empty array here) ==> to run ONCE
 
-    //initial array
+    //initial render and search
     useEffect(() => {
-        fetchMovies(1);
-    }, []);
+        // setSearchTerm(initialState);
+        fetchMovies(1,searchTerm);
+    }, [searchTerm]);
 
-    return {state,loading,error}; // it will return state:state [is in es6 format]
+
+    useEffect(()=> {
+        if(!isLoadingMore) return;
+
+        fetchMovies(state.page+1,searchTerm);
+        setIsLoadingMore(false);
+    },[isLoadingMore]);
+
+    return {state,loading,error,searchTerm,setSearchTerm,setIsLoadingMore}; // it will return state:state [is in es6 format]
 }

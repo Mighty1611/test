@@ -17,20 +17,18 @@ const defaultConfig = {
 
 
 export default {
-    fetchMovies: async(searchTerm, page) => {
-        const endpoint = searchTerm 
-        ? `${SEARCH_BASE_URL}${searchTerm}&page=${page}`
-        : `${POPULAR_BASE_URL}&page=${page}`;
-        return await (await fetch(endpoint)).json();
-        //await fetch from endpoint
-        // then await when I convert it with JSON
-    },
-    fetchMovie: async(movieId) => {
-        const endpoint = `${API_URL}movie/${movieId}?api_key=${API_KEY}`;
-        return await(await fetch(endpoint)).json();
-    },
-    fetchCredits: async(movieID) => {
-        const creditsEndpoint = `${API_URL}movie/${movieID}/credits?api_key=${API_KEY}`;
-        return await(await fetch(creditsEndpoint)).json();
-    }
+fetchMovies: async (searchTerm, page) => {
+    const endpoint = searchTerm
+      ? `${SEARCH_BASE_URL}${searchTerm}&page=${page}`
+      : `${POPULAR_BASE_URL}&page=${page}`;
+    return await (await fetch(endpoint)).json();
+  },
+  fetchMovie: async movieId => {
+    const endpoint = `${API_URL}movie/${movieId}?api_key=${API_KEY}`;
+    return await (await fetch(endpoint)).json();
+  },
+  fetchCredits: async movieId => {
+    const creditsEndpoint = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
+    return await (await fetch(creditsEndpoint)).json();
+  }
 }
