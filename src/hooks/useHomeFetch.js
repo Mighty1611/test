@@ -13,14 +13,12 @@ const initialState = {
 };
 
 export const useHomeFetch = () => {
-    const [state, setState] = useState(); // State that will hold all the movies
-
+    const [state, setState] = useState(initialState); // State that will hold all the movies
     const [loading, setLoading] = useState(false); // state for loadig
-
     const [error, setError] = useState(false); // for when we get error from API
 
 
-    const fetchMovies = async(page, searchTerm = "") => {
+    const fetchMovies = async(page, searchTerm = '') => {
         try{
             setError(false);
             setLoading(true);
