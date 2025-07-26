@@ -30,7 +30,7 @@ export default {
         return await(await fetch(endpoint)).json();
     },
     fetchCredits: async(movieID) => {
-        const creditsEndpoint = `${API_URL}movie/$${movieID}/credits?api_key=${API_KEY}`;
+        const creditsEndpoint = `${API_URL}movie/${movieID}/credits?api_key=${API_KEY}`;
         return await(await fetch(creditsEndpoint)).json();
     }
 }
