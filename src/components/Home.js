@@ -37,6 +37,7 @@ const Home = () => {
                 
                 title={state.results[0].original_title}
                 text={state.results[0].overview}
+                movieId={state.results[0].id}
             />
             ) : null}
             <SearchBar setSearchTerm={setSearchTerm}/>

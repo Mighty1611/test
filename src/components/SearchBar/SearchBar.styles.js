@@ -38,7 +38,7 @@ export const Content = styled.div`
         height: 40px;
         color: var(--white);
 
-        :focus{
+        &:focus{
             outline: none;
         }
     }

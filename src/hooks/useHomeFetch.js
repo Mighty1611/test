@@ -5,6 +5,9 @@ import {useState,useEffect, useRef}  from 'react';
 //api
 import API from '../API';
 
+// helper session storage
+import { isPersistedState } from '../helpers';
+
 const initialState = {
     page: 0,
     results: [],
@@ -54,7 +57,19 @@ export const useHomeFetch = () => {
 
     //initial render and search
     useEffect(() => {
-        // setSearchTerm(initialState);
+        // console.log('echo');
+        // if(!searchTerm && state!=initialState) {
+        //     const sessionState = isPersistedState('homeState');
+
+        //     if(sessionState){
+        //         setState(sessionState);
+        //         return;
+        //     }
+        // }
+        // console.log('echo2');
+
+
+        setState(initialState);
         fetchMovies(1,searchTerm);
     }, [searchTerm]);
 
@@ -65,6 +80,17 @@ export const useHomeFetch = () => {
         fetchMovies(state.page+1,searchTerm);
         setIsLoadingMore(false);
     },[isLoadingMore]);
+
+
+        //write To Session State
+    // useEffect(() => {
+
+    //     if(!searchTerm){
+    //         sessionStorage.setItem('homeState',JSON.stringify(state))
+    //         console.log('state retrieved');
+    //     }
+    // },[searchTerm,state])
+
 
     return {state,loading,error,searchTerm,setSearchTerm,setIsLoadingMore}; // it will return state:state [is in es6 format]
 }
