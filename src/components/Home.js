@@ -25,7 +25,6 @@ const Home = () => {
     // use es6 destructive syntax
     const { state, loading, error, searchTerm, setSearchTerm,setIsLoadingMore } = useHomeFetch();
     console.log(state);
-
     if(error) return (<div>Something went Wrogn!!!</div>);
 
     return( 

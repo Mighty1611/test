@@ -1,5 +1,5 @@
 {
-  "homepage": "https://Mighty1611/github.io/test/public/index.html",
+  
   "name": "movie_git_test04",
   "version": "0.1.0",
   "private": true,
@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.7.1",
     "react-scripts": "^5.0.1",
     "styled-components": "^6.1.19",
     "web-vitals": "^2.1.4"

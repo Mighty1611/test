@@ -1,0 +1,20 @@
+import React from 'react';
+
+import { Wrapper, Content } from './BreadCrumb.styles';
+import { Link } from 'react-router-dom'
+
+const BreadCrumb = ({ movieTitle }) => (
+    <Wrapper>
+        <Content>
+            <Link to='/'>
+                <span>Head Home</span>
+            </Link>
+            <span>|</span>
+            <span>{movieTitle}</span>
+        </Content>
+    </Wrapper>
+);
+
+export default BreadCrumb;
+
+//movieTitle
